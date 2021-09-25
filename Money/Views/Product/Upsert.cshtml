@@ -1,0 +1,115 @@
+﻿
+
+@model Money.Models.ViewModels.prodcutVM
+
+@{
+    var title = "Create Product";
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            @if (Model.Prodcut.Id != 0)
+            {
+                title = "Edit Product";
+                <input asp-for="Prodcut.Id" hidden />
+            }
+
+
+            <div class="form-group">
+                <label asp-for="Prodcut.Name" class="control-label"></label>
+                <input asp-for="Prodcut.Name" class="form-control" />
+                <span asp-validation-for="Prodcut.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prodcut.Price" class="control-label"></label>
+                <input asp-for="Prodcut.Price" class="form-control" />
+                <span asp-validation-for="Prodcut.Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Prodcut.Description" class="control-label"></label>
+                <textarea asp-for="Prodcut.Description" class="form-control summernote">  </textarea>
+                <span asp-validation-for="Prodcut.Description" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-3 offset-1 pt-4">
+                    <label asp-for="Prodcut.Image" class="control-label"></label>
+                    <img src="@Wc.ImagePath@Model.Prodcut.Image" width="100%" style="border:1px solid" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prodcut.Image" class="control-label"></label>
+                <input type="file" asp-for="Prodcut.Image" name="files" id="uploadBox" multiple class="form-control" />
+                <span asp-validation-for="Prodcut.Image" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Prodcut.CategoryId" class="control-label"></label>
+                <select asp-for="Prodcut.CategoryId" asp-items="@Model.CategorySelectListItem" class="form-control">
+
+                    <option disabled> Select Category</option>
+                </select>
+                <span asp-validation-for="Prodcut.CategoryId" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                @if (Model.Prodcut.Id != 0)
+                {
+                    //update
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-success">Back to List</a>
+
+                }
+                else
+                {
+
+                    <input type="submit" onclick="return ValidateInput()" value="Create" class="btn btn-primary" />
+
+                    <a asp-action="Index" class="btn btn-success">Back to List</a>
+
+                }
+            </div>
+        </form>
+
+        @section Scripts{
+            @{ <partial name="_ValidationScriptsPartial" />}
+
+            <script>
+
+                $('.summernote').summernote({
+                    height: 300,                 // set editor height
+                    minHeight: null,             // set minimum height of editor
+                    maxHeight: null,             // set maximum height of editor
+                    focus: true                  // set focus to editable area after initializing summernote
+                });
+
+                function ValidateInput() {
+                    if (document.getElementById("uploadBox").value() == "") {
+                        Swal.fire(
+                            'Error!',
+                            'pleas upload an image',
+                            'error'
+
+                        
+                        return false;
+                        )
+                        
+                    }
+                    return true;
+                }
+
+            </script>
+            
+
+        }
+    </div>
+</div>
+
+
+

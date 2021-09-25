@@ -15,7 +15,8 @@ namespace Money.Data
         }
 
         public DbSet<Category> Category { get; set; }
-        public DbSet<ApplicationType> applicationTypes { get; set; }
+        public DbSet<ApplicationType> ApplicationTypes { get; set; }
+        public DbSet<Product> Product{ get; set; }
 
     }
 }

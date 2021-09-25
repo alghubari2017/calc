@@ -20,7 +20,7 @@ namespace Money.Controllers
         public IActionResult Index()
         {
 
-            IEnumerable<ApplicationType> objlist = _db.applicationTypes;
+            IEnumerable<ApplicationType> objlist = _db.ApplicationTypes;
             return View(objlist);
         }
 
@@ -31,8 +31,6 @@ namespace Money.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
 
       
 
@@ -43,7 +41,7 @@ namespace Money.Controllers
                 return NotFound();
 
             }
-            var obj = _db.applicationTypes.Find(id);
+            var obj = _db.ApplicationTypes.Find(id);
             if (obj == null)
             {
                 return NotFound();
@@ -57,7 +55,7 @@ namespace Money.Controllers
                 return NotFound();
 
             }
-            var obj = _db.applicationTypes.Find(id);
+            var obj = _db.ApplicationTypes.Find(id);
             if (obj == null)
             {
                 return NotFound();
@@ -75,7 +73,7 @@ namespace Money.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.applicationTypes.Update(obj);
+                _db.ApplicationTypes.Update(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
 
@@ -96,7 +94,7 @@ namespace Money.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.applicationTypes.Remove(obj);
+                _db.ApplicationTypes.Remove(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
 
@@ -105,13 +103,14 @@ namespace Money.Controllers
 
 
         }
+     
 
         [HttpPost]
         [ValidateAntiForgeryToken]
 
         public IActionResult Create( ApplicationType obj)
         {
-            _db.applicationTypes.Add(obj);
+            _db.ApplicationTypes.Add(obj);
             _db.SaveChanges();
 
             return RedirectToAction("Index");
